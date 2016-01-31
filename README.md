@@ -1,13 +1,14 @@
-= google-now-cli
+= google-now-cli =
 
 Command Line for Google Now, based on https://github.com/mgomes/GCalc
 
-== Requirements
+== Requirements ==
 
 * Mechanize
 * Addressable
 
-== Usage  
+== Usage ==
+
 	~> ruby g.rb "20 + 30 * 1/2"
 	20 + ((30 * 1) / 2) = 35
    
@@ -29,11 +30,11 @@ Command Line for Google Now, based on https://github.com/mgomes/GCalc
 	~> ruby g.rb 'who invented the Internet?'
 	Robert  E. Kahn,Vint Cerf Internet, Inventors
 
-== Changes
+== Changes ==
 
 * 1.0: It's been released into the wild.
 * 2.0: Works with other Google Now commands (time, city capitals, important people, etc.)
 
-== Author
+== Author ==
 
 (c) 2009 Mauricio Gomes
