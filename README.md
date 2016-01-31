@@ -1,6 +1,6 @@
 # google-now-cli #
 
-Command Line for Google Now, based on <https://github.com/mgomes/GCalc>
+Proof of Concept - Command Line for Google Now, based on <https://github.com/mgomes/GCalc>
 
 ## Requirements ##
 
@@ -37,5 +37,6 @@ Command Line for Google Now, based on <https://github.com/mgomes/GCalc>
 
 ## Author ##
 
-(c) 2009 Mauricio Gomes
+Originally created by Mauricio Gomes
+Updated by Joe Chan
 
