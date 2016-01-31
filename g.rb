@@ -26,5 +26,8 @@ if doc.at_css('h2.r')
   puts doc.search("//h2[@class='r']").inner_text
 else
   # for everything else
+  # TODO: pretty-print some of the other queries (like "will it rain on Monday?")
+  # TODO: find commands that do not work
+  # FIXME: sports queries do not work ("how are the Broncos doing?")
   puts doc.search("//div[@id='ires']/ol/*[1]").inner_text
 end
