@@ -1,9 +1,30 @@
 #!/usr/bin/env ruby
-# GCalc - Command line calculator powered by google
+# g.rb - Command line for Google Now
 # Usage: ruby g.rb "20 + 30 * 1/2"
+# Usage: ruby g.rb "what is the capital of washington"
+# Usage: ruby g.rb "128371 bytes per second in MBps"
 #
 # (c) 2009 Mauricio Gomes <mauricio@edge14.com>
+# Updated by @joech4n to work with other Google Now results
 
-%w(rubygems mechanize erb).each {|lib| require lib }
-doc = Mechanize.new.get("http://www.google.com/search?q=#{ERB::Util.u(ARGV*' ')}")
-puts doc.search("//h2[@class='r']").inner_text
+%w(mechanize addressable/uri).each do |lib|
+  begin
+    require lib
+    rescue LoadError => e
+      puts "#{e.message}: Please run `gem install #{lib}`"
+    exit
+  end
+end
+
+uri = Addressable::URI.parse("http://www.google.com/search")
+uri.query_values = {q: ARGV*' '}
+uri = uri.normalize.to_s
+doc = Mechanize.new.get(uri)
+
+if doc.at_css('h2.r')
+  # for Google Calculator
+  puts doc.search("//h2[@class='r']").inner_text
+else
+  # for everything else
+  puts doc.search("//div[@id='ires']/ol/*[1]").inner_text
+end
