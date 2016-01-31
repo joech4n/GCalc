@@ -24,9 +24,6 @@ Proof of Concept - Command Line for Google Now, based on <https://github.com/mgo
 	~> ruby g.rb 1234 bytes per second in MBps
 	1234 (bytes per second) = 0.001234 MBps
 
-	~> ruby g.rb 1234 bytes per second in MBps
-	1234 (bytes per second) = 0.001234 MBps
-
 	~> ruby g.rb 'who invented the Internet?'
 	Robert  E. Kahn,Vint Cerf Internet, Inventors
 
