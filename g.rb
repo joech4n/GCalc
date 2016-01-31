@@ -10,8 +10,8 @@
 %w(mechanize addressable/uri).each do |lib|
   begin
     require lib
-    rescue LoadError => e
-      puts "#{e.message}: Please run `#{`which gem`.chomp} install #{lib.split('/')[0]}`"
+  rescue LoadError => e
+    puts "#{e.message}: Please run `#{`which gem`.chomp} install #{lib.split('/')[0]}`"
     exit
   end
 end
