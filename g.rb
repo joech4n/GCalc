@@ -7,13 +7,25 @@
 # (c) 2009 Mauricio Gomes <mauricio@edge14.com>
 # Updated by @joech4n to work with other Google Now results
 
-%w(mechanize addressable/uri).each do |lib|
+%w(addressable/uri mechanize).each do |lib|
   begin
     require lib
   rescue LoadError => e
     puts "#{e.message}: Please run `#{`which gem`.chomp} install #{lib.split('/')[0]}`"
     exit
   end
+end
+
+# for Windows only
+if Gem.win_platform?
+   %w(clipboard rb-notifu).each do |lib|
+     begin
+       require lib
+     rescue LoadError => e
+       puts "#{e.message}: Please run `#{`which gem`.chomp} install #{lib.split('/')[0]}`"
+       exit
+     end
+   end
 end
 
 uri = Addressable::URI.parse("http://www.google.com/search")
@@ -23,11 +35,20 @@ doc = Mechanize.new.get(uri)
 
 if doc.at_css('h2.r')
   # for Google Calculator
-  puts doc.search("//h2[@class='r']").inner_text
+  results = doc.search("//h2[@class='r']").inner_text
 else
   # for everything else
   # TODO: pretty-print some of the other queries (like "will it rain on Monday?")
   # TODO: find commands that do not work
   # FIXME: sports queries do not work ("how are the Broncos doing?")
-  puts doc.search("//div[@id='ires']/ol/*[1]").inner_text
+  results = doc.search("//div[@id='ires']/ol/*[1]").inner_text
 end
+
+if Gem.win_platform?
+  Notifu::show :message => results, :time => 5000, :nosound => '', :type => :info do |status|
+    p Notifu::ERRORS.include? status
+  end
+  Clipboard.copy results
+end
+
+puts results
